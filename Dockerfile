@@ -13,4 +13,7 @@ WORKDIR /srv
 RUN git clone https://github.com/OHF-Voice/linux-voice-assistant.git .
 RUN ./script/setup
 
+# Ensure the application directory is writable for user 1000
+RUN chown -R 1000:1000 /srv
+
 ENTRYPOINT ["./script/run"]
