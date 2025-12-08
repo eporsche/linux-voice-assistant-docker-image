@@ -11,6 +11,11 @@ RUN apt-get update && \
 
 WORKDIR /srv
 RUN git clone https://github.com/OHF-Voice/linux-voice-assistant.git .
+
+# Copy and apply the MAC address patch
+COPY mac.patch /tmp/mac.patch
+RUN git apply /tmp/mac.patch && rm /tmp/mac.patch
+
 RUN ./script/setup
 
 # Ensure the application directory is writable for user 1000
